@@ -2,6 +2,8 @@
 
 > Proxy remote server with local assets.
 
+[![NPM](https://nodei.co/npm/grunt-butchershop.png?downloads=true&stars=true)](https://nodei.co/npm/grunt-butchershop/)
+
 ## Getting Started
 This plugin requires Grunt.
 
