@@ -52,6 +52,8 @@ Default: `{}`
 Type: `Object`
 Default: `{}`
 
+---------------------------------------
+
 Additionally, the plugin uses the following options to configure other aspects of the task:
 
 #### chop
