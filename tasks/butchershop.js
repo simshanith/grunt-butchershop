@@ -64,15 +64,23 @@ module.exports = function (grunt) {
     grunt.log.ok('Starting butchershop...');
     butcher.start();
 
-    // Butchershop populates passed options with defaults, so this is safe.
-    var butcherUrl = ['http://', options.local.host, ':', options.local.port].join('');
-    grunt.verbose.writeln('Constructing open url using base: %s', butcherUrl);
+    function openButchershop() {
+      // Butchershop populates passed options with defaults, so this should be safe.
+      var butcherUrl = ['http://', options.local.host, ':', options.local.port].join('');
 
-    if( options.open === true ) {
+      grunt.verbose.writeln('Constructing open url using base: %s', butcherUrl);
+
+      if( _.isString(options.open )) {
+          butcherUrl += ensureLeadingSlash(options.open);
+      }
+
+      grunt.log.ok('Opening default browser: %s', butcherUrl);
       open(butcherUrl);
-    } else if ( _.isString(options.open) ) {
-      // need to ensure leading slash.
-      open(butcherUrl+ensureLeadingSlash(options.open));
+    }
+
+    if( options.open === true || _.isString(options.open) ) {
+      // hacky
+      _.delay(openButchershop, 200);
     }
 
     if( !keepAlive ) {
