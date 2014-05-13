@@ -44,17 +44,17 @@ Butchershop delegates to Hapi for most requests. Current Butchershop `v0.0.6` us
 
 Especially relevant are:
 
-### `local`
+#### local
 Type: `Object`
 Default: `{}`
 
-###`proxy`
+#### proxy
 Type: `Object`
 Default: `{}`
 
 Additionally, the plugin uses the following options to configure other aspects of the task:
 
-### chop
+#### chop
 Type: `Object`
 Default: `{}`
 
