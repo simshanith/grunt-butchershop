@@ -1,4 +1,4 @@
-# grunt-butchershop
+# grunt-butchershop [![Build Status](https://travis-ci.org/simshanith/grunt-butchershop.svg?branch=master)](https://travis-ci.org/simshanith/grunt-butchershop) [![Dependency Status](https://david-dm.org/simshanith/grunt-butchershop.svg)](https://david-dm.org/simshanith/grunt-butchershop) [![devDependency Status](https://david-dm.org/simshanith/grunt-butchershop/dev-status.svg)](https://david-dm.org/simshanith/grunt-butchershop#info=devDependencies)
 
 > Proxy remote server with local assets.
 
