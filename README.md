@@ -80,7 +80,7 @@ grunt.initConfig({
 Type: `String | Boolean`
 Default: `false`
 
-If `true`, opens the browser to the public tunnel page. If a string, the option is treated as a path, eg:
+If `true`, opens the browser to the local proxied page. If a string, the option is treated as a path, eg:
 
 ```js
 grunt.initConfig({
