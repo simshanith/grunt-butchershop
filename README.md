@@ -106,7 +106,13 @@ This option can also be enabled ad-hoc by running the task like `grunt butchersh
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+### v0.1.1
+- Improved `open` functionality. Needs refinement in Butchershop to not have race condition.
+
+### v0.1.0
+- Initial Release
+
 
 ## License
 Copyright (c) 2014 Shane Daniel. Licensed under the MIT license.
