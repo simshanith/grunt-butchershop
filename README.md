@@ -37,50 +37,68 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+Butchershop delegates to Hapi for most requests. Current Butchershop `v0.0.6` uses Hapi `~0.15.6`:
+<https://github.com/spumko/hapi/blob/v0.15.6/docs/Reference.md>
 
-A string value that is used to do something with whatever.
+Especially relevant are:
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+### `local`
+Type: `Object`
+Default: `{}`
 
-A string value that is used to do something else with whatever else.
+###`proxy`
+Type: `Object`
+Default: `{}`
 
-### Usage Examples
+Additionally, the plugin uses the following options to configure other aspects of the task:
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+### chop
+Type: `Object`
+Default: `{}`
 
-```js
-grunt.initConfig({
-  butchershop: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+Key-value pairs of server paths to chop to local paths. Keys are server HTTP path; values are the local file path with `Gruntfile` directory as `cwd`. E.g:
 
 ```js
 grunt.initConfig({
   butchershop: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+    main: {
+     options: {
+      chop: {
+      '/stylus/{path*}':  './test/fixtures/stylus-local'
+    }
+   }
+  }
+}
+});
 ```
+
+#### open
+Type: `String | Boolean`
+Default: `false`
+
+If `true`, opens the browser to the public tunnel page. If a string, the option is treated as a path, eg:
+
+```js
+grunt.initConfig({
+  butchershop: {
+    main: {
+     options: {
+      open: 'path/'
+   }
+  }
+}
+});
+```
+...should expect to open `http://localhost:8000/path/` upon launch.
+
+#### keepalive
+Type: `Boolean`  
+Default: `false`
+
+Keep the server alive indefinitely. Note that if this option is enabled, any tasks specified after this task will _never run_. By default, once grunt's tasks have completed, the web server stops. This option changes that behavior.
+
+This option can also be enabled ad-hoc by running the task like `grunt butchershop:targetname:keepalive`
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

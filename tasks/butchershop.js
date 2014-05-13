@@ -8,44 +8,77 @@
 
 'use strict';
 
+var Butchershop = require('butchershop');
+var open = require('open');
+var _ = require('lodash');
+
 module.exports = function (grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+  // Matches leading slash.
+  var leadingSlashRegex = /^\//;
+  // Trim leading slash.
+  function trimLeadingSlash(url) {
+    if( _.isString(url) ) {
+      return url.replace(leadingSlashRegex, '');
+    }
+  }
+
+  // Unshifts a slash if present then shifts one.
+  // Yay idempotency.
+  function ensureLeadingSlash(path) {
+    if( _.isString(path) ) {
+      return '/'+trimLeadingSlash(path);
+    }
+  }
 
   grunt.registerMultiTask('butchershop', 'Proxy remote server with local assets.', function () {
 
+    var task = this;
+
+    var done = task.async();
+
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+    var defaults = {
+      local: {},
+      proxy: {},
+      chop: {},
+      open: false,
+      keepalive: false
+    };
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function (file) {
-      // Concat specified files.
-      var src = file.src.filter(function (filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function (filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+    var options = task.options(defaults);
+    var keepAlive = task.flags.keepalive || options.keepalive;
 
-      // Handle options.
-      src += options.punctuation;
+    var taskSpecificOptions = ['chop', 'keepalive', 'open'];
+    var butcher = new Butchershop(_.omit(options, taskSpecificOptions));
 
-      // Write the destination file.
-      grunt.file.write(file.dest, src);
+    if( !_.isEmpty(options.chop) ) {
+      grunt.log.ok('Chopping local assets...');
 
-      // Print a success message.
-      grunt.log.writeln('File "' + file.dest + '" created.');
-    });
+      _.each(options.chop, function(localPath, serverPath) {
+        grunt.verbose.ok('Chopping %s to %s', serverPath, localPath);
+        butcher.chop(serverPath, localPath);
+      });
+    }
+
+    grunt.log.ok('Starting butchershop...');
+    butcher.start();
+
+    // Butchershop populates passed options with defaults, so this is safe.
+    var butcherUrl = ['http://', options.local.host, ':', options.local.port].join('');
+    grunt.verbose.writeln('Constructing open url using base: %s', butcherUrl);
+
+    if( options.open === true ) {
+      open(butcherUrl);
+    } else if ( _.isString(options.open) ) {
+      // need to ensure leading slash.
+      open(butcherUrl+ensureLeadingSlash(options.open));
+    }
+
+    if( !keepAlive ) {
+      done();
+    }
+
   });
 
 };

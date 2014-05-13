@@ -33,27 +33,30 @@ module.exports = function (grunt) {
 
     // Configuration to be run (and then tested).
     butchershop: {
-      default_options: {
+      example: {
         options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+          chop: {
+            '/stylus/{path*}': './test/fixtures/stylus-local'
+          }
         }
       },
-      custom_options: {
+      open: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          chop: {
+            '/stylus/{path*}': './test/fixtures/stylus-local'
+          },
+          keepalive: true,
+          open: 'package/grunt-butchershop'
         }
       }
     },
 
     // Unit tests.
     nodeunit: {
-      tests: ['test/*_test.js']
+      tests: ['test/*_test.js'],
+      options: {
+        reporter: 'verbose'
+      }
     }
 
   });
@@ -61,9 +64,9 @@ module.exports = function (grunt) {
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'butchershop', 'nodeunit']);
+  // Whenever the "test" task is run, launch the server then run tests.
+  // TODO: write tests.it
+  grunt.registerTask('test', ['butchershop:example', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

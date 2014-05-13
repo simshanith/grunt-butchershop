@@ -3,32 +3,54 @@
   "version": "0.0.1",
   "description": "Proxy remote server with local assets.",
   "homepage": "https://github.com/simshanith/grunt-butchershop",
-  "repository": "https://github.com/simshanith/grunt-butchershop.git",
   "author": {
     "name": "Shane Daniel",
     "email": "simrpgman@gmail.com",
     "url": "http://simloovoo.com"
   },
-  "keywords": [
-    "gruntplugin"
+  "bugs": {
+    "url": "https://github.com/simshanith/grunt-butchershop/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simshanith/grunt-butchershop.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/simshanith/grunt-butchershop/blob/master/LICENSE-MIT"
+    }
   ],
-  "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-nodeunit": "~0.3.0",
-    "grunt": "~0.4.2",
-    "jshint-stylish": "~0.1.5",
-    "load-grunt-tasks": "~0.3.0"
   },
   "scripts": {
     "test": "grunt test"
   },
   "dependencies": {
-    "butchershop": "0.0.6"
-  }
+    "butchershop": "~0.0.6",
+    "lodash": "~2.4.1",
+    "open": "~0.0.5"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.3.3",
+    "jshint-stylish": "~0.2.0",
+    "load-grunt-tasks": "~0.4.0",
+    "q": "~1.0.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin",
+    "giblets",
+    "butchershop",
+    "proxy"
+  ],
+  "files": [
+    "tasks",
+    "LICENSE-MIT"
+  ]
 }
