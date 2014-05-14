@@ -25,8 +25,9 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt"
+    "test": "grunt --verbose"
   },
+  "main": "tasks/butchershop.js",
   "dependencies": {
     "butchershop": "~0.0.6",
     "lodash": "~2.4.1",
