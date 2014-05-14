@@ -109,11 +109,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-### v0.1.1
-- Improved `open` functionality. Needs refinement in Butchershop to not have race condition.
-
-### v0.1.0
-- Initial Release
+* 2014-05-14 v0.1.2 Refined package.
+* 2014-05-13 v0.1.1 Improved `open` functionality. Needs refinement in Butchershop to not have race condition.
+* 2014-05-13 v0.1.0 Initial Release
 
 
 ## License
