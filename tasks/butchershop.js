@@ -61,31 +61,34 @@ module.exports = function (grunt) {
       });
     }
 
-    grunt.log.ok('Starting butchershop...');
-    butcher.start();
+    butcher.server.on('start', function() {
+        function openButchershop() {
+          // Butchershop populates passed options with defaults, so this should be safe.
+          var butcherUrl = ['http://', options.local.host, ':', options.local.port].join('');
 
-    function openButchershop() {
-      // Butchershop populates passed options with defaults, so this should be safe.
-      var butcherUrl = ['http://', options.local.host, ':', options.local.port].join('');
+          grunt.verbose.writeln('Constructing open url using base: %s', butcherUrl);
 
-      grunt.verbose.writeln('Constructing open url using base: %s', butcherUrl);
+          if( _.isString(options.open )) {
+              butcherUrl += ensureLeadingSlash(options.open);
+          }
 
-      if( _.isString(options.open )) {
-          butcherUrl += ensureLeadingSlash(options.open);
+          grunt.log.ok('Opening default browser: %s', butcherUrl);
+          open(butcherUrl);
+        }
+        if( options.open === true || _.isString(options.open) ) {
+        // hacky
+        _.delay(openButchershop, 200);
       }
 
-      grunt.log.ok('Opening default browser: %s', butcherUrl);
-      open(butcherUrl);
-    }
+      if( !keepAlive ) {
+        done();
+      }
+    });
 
-    if( options.open === true || _.isString(options.open) ) {
-      // hacky
-      _.delay(openButchershop, 200);
-    }
-
-    if( !keepAlive ) {
-      done();
-    }
+    grunt.log.ok('Starting butchershop...');
+    butcher.start(function() {
+      butcher.server.emit('start');
+    });
 
   });
 
