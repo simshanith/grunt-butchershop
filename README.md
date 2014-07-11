@@ -39,8 +39,8 @@ grunt.initConfig({
 
 ### Options
 
-Butchershop delegates to Hapi for most requests. Current Butchershop `v0.0.6` uses Hapi `~0.15.6`:
-<https://github.com/spumko/hapi/blob/v0.15.6/docs/Reference.md>
+Butchershop delegates to Hapi for most requests. Current Butchershop `v0.1.0` uses Hapi `~6.0.2`:
+<http://hapijs.com/api/v6.0.2>
 
 Especially relevant are:
 
