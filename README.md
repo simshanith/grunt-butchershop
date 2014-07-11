@@ -109,6 +109,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2014-07011 v0.2.0 Updated Butchershop dependency and refined done() callback to avoid race condition.
 * 2014-05-14 v0.1.2 Refined package.
 * 2014-05-13 v0.1.1 Improved `open` functionality. Needs refinement in Butchershop to not have race condition.
 * 2014-05-13 v0.1.0 Initial Release
