@@ -1,6 +1,6 @@
 {
   "name": "grunt-butchershop",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Proxy remote server with local assets.",
   "homepage": "https://github.com/simshanith/grunt-butchershop",
   "author": {
@@ -29,7 +29,7 @@
   },
   "main": "tasks/butchershop.js",
   "dependencies": {
-    "butchershop": "0.1.x",
+    "butchershop": "0.1.0-pre",
     "lodash": "~2.4.1",
     "open": "~0.0.5"
   },
